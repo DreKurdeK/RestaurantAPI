@@ -2,15 +2,9 @@
 
 namespace RestaurantAPI
 {
-    public class RestaurantSeeder
+    public class RestaurantSeeder(RestaurantDbContext dbContext)
     {
-        private readonly RestaurantDbContext _dbContext;
-
-        // Constructor
-        public RestaurantSeeder(RestaurantDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        private readonly RestaurantDbContext _dbContext = dbContext;
 
         // Seed method to populate the database
         public void Seed()
@@ -27,7 +21,7 @@ namespace RestaurantAPI
         }
 
         // Method to create a list of restaurant data
-        private IEnumerable<Restaurant> GetRestaurants()
+        private static List<Restaurant> GetRestaurants()
         {
             var restaurants = new List<Restaurant>()
             {
@@ -40,7 +34,7 @@ namespace RestaurantAPI
                     ContactEmail = "contact@kfc.com",
                     ContactNumber = "987-654-321",
                     HasDelivery = true,
-                    Dishes = new List<Dish>()
+                    Dishes =
                     {
                         new Dish()
                         {
@@ -62,15 +56,15 @@ namespace RestaurantAPI
                 },
                 new()
                 {
-                    Name = "McDonalds",
+                    Name = "McDonald Szewska",
                     Category = "Fast Food",
                     Description =
                     "McDonalds is the world's biggest fast food chain with its presence in over 100 countries.",
                     ContactEmail = "contact@mcdonalds.com",
                     ContactNumber = "987-654-321",
                     HasDelivery = true,
-                    Dishes = new List<Dish>()
-                    {
+                    Dishes =
+                    [
                         new Dish()
                         {
                             Name = "Big Mac",
@@ -81,7 +75,7 @@ namespace RestaurantAPI
                             Name = "French Fries",
                             Price = 3.00M,
                         },
-                    },
+                    ],
                     Address = new Address()
                     {
                         City = "Kraków",

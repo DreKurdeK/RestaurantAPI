@@ -1,5 +1,7 @@
 using RestaurantAPI;
 using RestaurantAPI.Entities;
+using RestaurantAPI.Services;
+using System.Reflection;
 
 internal class Program
 {
@@ -8,10 +10,11 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddTransient<IWeatherForcastService, WeatherForcastService>();
         builder.Services.AddControllers();
         builder.Services.AddDbContext<RestaurantDbContext>();
         builder.Services.AddScoped<RestaurantSeeder>();
+        builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 
         var app = builder.Build();
 
