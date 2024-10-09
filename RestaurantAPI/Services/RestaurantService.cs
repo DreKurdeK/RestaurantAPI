@@ -10,38 +10,37 @@ namespace RestaurantAPI.Services
         RestaurantDto? GetById(int id);
         List<RestaurantDto> GetAll();
         int Create(CreateRestaurantDto dto);
-        bool Delete(int id);
-        bool Update(int id, UpdateRestaurantDto dto);
+        void Delete(int id);
+        void Update(int id, UpdateRestaurantDto dto);
     }
 
-    public class RestaurantService(RestaurantDbContext dbContext, IMapper mapper) : IRestaurantService
+    public class RestaurantService(RestaurantDbContext dbContext, IMapper mapper, ILogger<RestaurantService> logger) : IRestaurantService
     {
-        public bool Update(int id, UpdateRestaurantDto dto)
+        public void Update(int id, UpdateRestaurantDto dto)
         {
             var restaurant = dbContext
                 .Restaurants
                 .FirstOrDefault(r => r.Id == id);
-            if (restaurant is null) 
-                return false;
+            if (restaurant is null)
+                throw new DirectoryNotFoundException("Restaurant not found");
 
             restaurant.Name = dto.Name;
             restaurant.Description = dto.Description;
             restaurant.HasDelivery = (bool)dto.HasDelivery;
 
             dbContext.SaveChanges();
-            return true;
         }
-        public bool Delete(int id)
+        public void Delete(int id)
         {
+            logger.LogError($"Restaurant with id: {id} DELETE action invoked");
             var restaurant = dbContext
                 .Restaurants
                 .FirstOrDefault(r => r.Id == id);
-            if (restaurant is null) return false;
+            if (restaurant is null) 
+                throw new DirectoryNotFoundException("Restaurant not found");
 
             dbContext.Restaurants.Remove(restaurant);
             dbContext.SaveChanges();
-
-            return true;
         }
         public RestaurantDto? GetById(int id)
         {
@@ -51,7 +50,8 @@ namespace RestaurantAPI.Services
                 .Include(r => r.Dishes)
                 .FirstOrDefault(r => r.Id == id);
 
-            if (restaurant == null) return null;
+            if (restaurant == null) 
+                throw new DirectoryNotFoundException("Restaurant not found");
 
             var result = mapper.Map<RestaurantDto>(restaurant);
             return result;
