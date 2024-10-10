@@ -42,6 +42,5 @@ namespace RestaurantAPI.Controllers
             dishSerivce.RemoveById(restaurantId, dishId);
             return NoContent();
         }
-
     }
 }

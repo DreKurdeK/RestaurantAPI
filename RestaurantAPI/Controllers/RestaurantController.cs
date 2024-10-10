@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestaurantAPI.Entities;
@@ -34,6 +35,7 @@ namespace RestaurantAPI.Controllers
 
 
         [HttpGet]
+        [Authorize]
         public ActionResult<IEnumerable<RestaurantDto>> GetAll()
         {
             var restaurantsDtos = restaurantService.GetAll();

@@ -1,4 +1,4 @@
-﻿using RestaurantAPI.Entities.Exceptions;
+﻿using RestaurantAPI.Exceptions;
 
 namespace RestaurantAPI.Middleware
 {
@@ -9,6 +9,11 @@ namespace RestaurantAPI.Middleware
             try
             {
                 await next.Invoke(context);
+            }
+            catch (BadRequestException badRequestException)
+            {
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsync(badRequestException.Message);
             }
             catch (NotFoundException notFoundException)
             {

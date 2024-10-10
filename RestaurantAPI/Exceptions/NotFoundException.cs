@@ -1,4 +1,4 @@
-﻿namespace RestaurantAPI.Entities.Exceptions
+﻿namespace RestaurantAPI.Exceptions
 {
     public class NotFoundException(string message) : Exception(message)
     {

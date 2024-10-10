@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using RestaurantAPI.Entities;
-using RestaurantAPI.Entities.Exceptions;
+using RestaurantAPI.Exceptions;
 using RestaurantAPI.Models;
 
 namespace RestaurantAPI.Services
