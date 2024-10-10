@@ -29,6 +29,7 @@ internal class Program
             b.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
             b.Services.AddScoped<IRestaurantService, RestaurantService>();
             b.Services.AddScoped<IDishService, DishService>();
+            b.Services.AddScoped<IAccountService, AccountService>();
             b.Services.AddScoped<ErrorHandlingMiddleware>();
             b.Services.AddScoped<RequestTimeMiddleware>();
             b.Services.AddSwaggerGen();
