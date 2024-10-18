@@ -9,7 +9,7 @@ namespace RestaurantAPI.Controllers
     public class DishController(IDishService dishSerivce) : ControllerBase
     {
         [HttpPost]
-        public ActionResult Post([FromRoute]int restaurantId, [FromBody]CreateDishDto dto)
+        public ActionResult Post([FromRoute] int restaurantId, [FromBody] CreateDishDto dto)
         {
             var newDishId = dishSerivce.Create(restaurantId, dto);
             return Created($"api/restaurant/{restaurantId}/dish/{newDishId}", null);

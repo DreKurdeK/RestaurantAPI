@@ -1,7 +1,9 @@
 ﻿namespace RestaurantAPI.Exceptions
 {
-    public class BadRequestException(string message) : Exception
+    public class BadRequestException : Exception
     {
-
+        public BadRequestException(string message)
+        {
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace RestaurantAPI
 {
     public class RestaurantMappingProfile : Profile
     {
-        public RestaurantMappingProfile() 
+        public RestaurantMappingProfile()
         {
             CreateMap<Restaurant, RestaurantDto>()
                 .ForMember(m => m.City, c => c.MapFrom(s => s.Address.City))

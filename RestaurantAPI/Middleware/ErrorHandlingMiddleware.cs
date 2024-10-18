@@ -10,6 +10,10 @@ namespace RestaurantAPI.Middleware
             {
                 await next.Invoke(context);
             }
+            catch (ForbidException)
+            {
+                context.Response.StatusCode = 403;
+            }
             catch (BadRequestException badRequestException)
             {
                 context.Response.StatusCode = 400;
@@ -22,7 +26,7 @@ namespace RestaurantAPI.Middleware
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, ex.Message);
+                logger.LogError(ex, "An unexpected error occurred: {Message}", ex.Message);
 
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsync("Something went wrong");
