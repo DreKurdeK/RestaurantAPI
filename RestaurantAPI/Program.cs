@@ -16,6 +16,8 @@ using RestaurantAPI.Services;
 using System.Reflection;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 
 internal class Program
 {
@@ -95,10 +97,18 @@ internal class Program
                     builder.AllowAnyMethod()
                         .AllowAnyHeader()
                         .WithOrigins(allowedOrigins)
-                        );
+                );
             });
 
-            b.Services.AddDbContext<RestaurantDbContext>(options => options.UseSqlServer(b.Configuration.GetConnectionString("RestaurantDbConnection")));
+            
+
+            b.Services.AddDbContext<RestaurantDbContext>(options =>
+            {
+                var connection = b.Environment.IsProduction()
+                ? Environment.GetEnvironmentVariable($"AZURE_SQL_CONNECTIONSTRING")
+                : b.Configuration.GetConnectionString("RestaurantDbConnection");
+                options.UseSqlServer();
+            });
 
             var app = b.Build();
 
