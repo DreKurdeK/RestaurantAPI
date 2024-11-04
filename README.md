@@ -44,7 +44,7 @@ Restaurant API is a .NET application designed to manage restaurants and their di
 
 ## Usage
 - The application supports JWT authorization. Users can register and log in, obtaining tokens to access protected resources.
-- API endpoints are available under "/api", and API documentation can be accessed at "/swagger".
+- API endpoints are available under  ‘/api’, and API documentation can be accessed at  ‘/swagger’.
 
 ## Logging
 The application uses NLog for logging events. Logs are configured in the NLog.config file.
