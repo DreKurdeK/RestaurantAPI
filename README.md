@@ -48,6 +48,3 @@ Restaurant API is a .NET application designed to manage restaurants and their di
 
 ## Logging
 The application uses NLog for logging events. Logs are configured in the NLog.config file.
-
-## Author
-Daniel Radziak
